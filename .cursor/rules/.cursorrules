@@ -1,0 +1,177 @@
+# Cursor Rules for Base Portal - Nuxt 3 Project
+
+## Tech Stack
+
+- **Framework**: Nuxt 3 (v3.19.3+)
+- **Language**: TypeScript
+- **UI Framework**: Vue 3 (Composition API)
+- **Styling**: Tailwind CSS + Custom CSS
+- **UI Library**: Flowbite 2.5.2
+- **Package Manager**: pnpm
+
+## Code Style & Conventions
+
+### Vue Components
+
+- Use `<script setup lang="ts">` for all components
+- Use Composition API with TypeScript
+- Name components using PascalCase (e.g., `Header.vue`, `ChallengeHeaderNav.vue`)
+- Use scoped styles: `<style lang="css" scoped>`
+- Component files should be placed in appropriate directories:
+  - `components/` - shared components
+  - `components/header/` - header components
+  - `components/modal/` - modal components
+  - `components/sidebar-right/` - sidebar components
+
+### TypeScript
+
+- Always use TypeScript for `.ts` and `.vue` files
+- Use type annotations for function parameters and return types
+- Use `interface` or `type` for type definitions
+- Import types from `#imports` when needed (Nuxt auto-imports)
+
+### Code Comments
+
+- **All code comments must be written in English**
+- Use clear and concise comments to explain complex logic
+- Comment style:
+  - Use `//` for single-line comments in TypeScript/JavaScript
+  - Use `/* */` for multi-line comments
+  - Use `<!-- -->` for HTML template comments
+- Write comments that explain "why" not "what" (code should be self-explanatory)
+- Add JSDoc comments for functions, classes, and exported utilities when appropriate
+- Keep comments up-to-date with code changes
+
+### Composables
+
+- Place composables in the `composables/` directory
+- File names should follow camelCase with `use` prefix (e.g., `useApi.ts`, `useLayoutConfig.ts`)
+- Export functions using named exports
+- Use `useRuntimeConfig()` to access runtime config
+- Use `useCookie()` for cookie management
+
+### API Calls
+
+- Use the `useApi()` composable from `composables/useApi.ts`
+- API base URL is retrieved from `runtimeConfig.public.apiBaseUrl`
+- Always include XSRF token in headers when available
+- Use `credentials: 'include'` for CORS requests
+- Handle errors properly with try-catch
+
+### File Structure
+
+```
+- components/          # Vue components
+- composables/         # Composable functions
+- constants/           # Constants and configs
+- layouts/             # Layout components
+- middleware/          # Route middleware
+- pages/               # Route pages (file-based routing)
+- plugins/             # Nuxt plugins
+- public/              # Static assets
+- server/              # Server-side code
+- types/               # TypeScript type definitions
+- utils/               # Utility functions
+- assets/              # Assets (CSS, images, templates)
+```
+
+### Styling
+
+- Use Tailwind CSS classes for main styling
+- Custom CSS in `assets/styles/` and `assets/template/css/`
+- Import CSS files in `nuxt.config.ts`
+- Use scoped styles in components when needed
+
+### Naming Conventions
+
+- **Files**: kebab-case for pages, PascalCase for components
+- **Variables/Functions**: camelCase
+- **Constants**: UPPER_SNAKE_CASE or camelCase depending on context
+- **Types/Interfaces**: PascalCase
+
+### Best Practices
+
+1. **Auto-imports**: Nuxt automatically imports utilities, no manual imports needed
+2. **Error Handling**: Always handle errors in async functions
+3. **Type Safety**: Use TypeScript types for all functions and variables
+4. **Code Comments**: All comments must be written in English
+5. **Code Organization**: Group related code in the same directory
+6. **Reusability**: Create composables for reusable logic
+7. **Performance**: Use lazy loading for large components when needed
+
+### Nuxt Specific
+
+- Use `defineNuxtConfig()` for config
+- Pages use file-based routing
+- Middleware files with `.global.ts` suffix will run globally
+- Plugins with `.client.ts` suffix only run on client-side
+- Use `useRuntimeConfig()` to access environment variables
+
+### Dependencies
+
+- **Nuxt**: ^3.19.3
+- **Vue**: ^3.5.22
+- **Flowbite**: 2.5.2
+- **Tailwind CSS**: @nuxtjs/tailwindcss 6.12.0
+
+## Code Examples
+
+### Component Structure
+
+```vue
+<script setup lang="ts">
+// Define component props, emits, and reactive state
+// Import composables and utilities as needed
+// Component logic here
+</script>
+
+<template>
+  <!-- Template markup here -->
+  <!-- Use Vue directives and bindings -->
+</template>
+
+<style lang="css" scoped>
+/* Scoped component styles here */
+/* Styles only apply to this component */
+</style>
+```
+
+### Composable Example
+
+```typescript
+// Export composable function with 'use' prefix
+export const useCustomComposable = () => {
+  // Access runtime configuration
+  const config = useRuntimeConfig();
+
+  // Define composable functions
+  const doSomething = async () => {
+    // Implementation here
+    // Can use config and other Nuxt utilities
+  };
+
+  // Return functions and reactive state
+  return { doSomething };
+};
+```
+
+### API Call Example
+
+```typescript
+// Get API composable instance
+const { apiFetch } = useApi();
+
+// Make API call with type safety
+// Replace 'ResponseType' with your actual response type
+const data = await apiFetch<ResponseType>("endpoint");
+
+// Handle response data
+// Error handling is done in the composable
+```
+
+## Notes
+
+- Always check TypeScript errors before committing
+- Use pnpm for package management
+- Follow Nuxt 3 conventions and best practices
+- Maintain consistency with the current codebase

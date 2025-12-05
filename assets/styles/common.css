@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #FFCC00;
+    --text-color: #343a40;
+    --border-color: #e9ecef;
+    --light-gray: #f8f9fa;
+    --gray: #6c757d;
+}
+
+.content-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+img {
+    display: inline
+}
